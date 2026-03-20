@@ -3,5 +3,6 @@ terraform {
     bucket = "dharma-1234567890"
     key = "karthik/terraform.tfstate"
     region = "us-west-2"
+    use_lockfile = true
   }
 }
