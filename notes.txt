@@ -1,0 +1,3 @@
+ami id for N.Virginia --- ami-02dfbd4ff395f2a1b
+ami id for Oregon     --- ami-03caad32a158f72db
+
