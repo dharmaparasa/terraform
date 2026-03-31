@@ -8,6 +8,7 @@ locals {
   instancetype2="t2.micro"
 }
 
+
 //target the already created subnet in oregon
 data "aws_subnet" "name" {
   filter {
