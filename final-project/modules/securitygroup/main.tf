@@ -1,18 +1,15 @@
 resource "aws_security_group" "name" {
-    name = "DharmaSG"
-
-
+    name = var.sg-name
+    vpc_id = var.sg-vpc
     dynamic "ingress" {
-      for_each = [
-        for port,cidr in {
-          22 = "0.0.0.0/0" 
-          80 = "192.168.0.0/16"}:{
-          from_port=port
-          to_port=port
-          cidr_blocks=[cidr]
-          protocol="tcp"
-        }
-      ]
+        for_each = [
+            for port,cidr in var.ingress-rule-map:{
+                from_port=port
+                to_port=port
+                cidr_blocks=[cidr]
+                protocol="tcp"
+            }
+        ]
       content {
           from_port   = ingress.value.from_port
           to_port     = ingress.value.to_port
@@ -27,8 +24,7 @@ resource "aws_security_group" "name" {
         protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
-}
-
-variable "ingress-rule-map" {
-  type = map(string)
+    tags = {
+      Name=var.name-tag
+    }
 }
