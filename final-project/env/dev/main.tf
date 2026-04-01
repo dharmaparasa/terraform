@@ -28,6 +28,17 @@ module "alb-sg" {
   name-tag = "SG2"
 }
 
+//sg for db
+module "db-sg" {
+  source = "../../modules/securitygroup"
+  ingress-rule-map = {
+    3306="0.0.0.0/0"
+  }
+  sg-vpc = module.vpc.vpc-id
+  sg-name = "db-sg"
+  name-tag = "SG3"
+}
+
 //creating ec2 with custom sg
 module "ec2" {
   source = "../../modules/ec2"
@@ -37,6 +48,7 @@ module "ec2" {
   sg_ids = [module.ec2-sg.sg_id]
 }
 
+//creating alb with custom sg
 module "alb" {
   source = "../../modules/loadbalancer"
   alb-name = "KarthikALB"
@@ -46,3 +58,9 @@ module "alb" {
   ec2-instance-id = module.ec2.instance_id
 }
 
+module "db"{
+  source = "../../modules/rds"
+  db-sgs = [module.db-sg.sg_id]
+  db-private-subnets = module.vpc.private-subnet-ids
+  db-instance-class = "db.t4g.micro"
+}

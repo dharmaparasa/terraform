@@ -7,7 +7,7 @@ module "ec2_instance" {
 #   key_name      = "user1"
   monitoring    = true
   //create subnet and give the subnet id
-  subnet_id     = "subnet-eddcdzz4"
+  subnet_id     = "subnet-0b2bf7e17f8192e25"
 
   tags = {
     Terraform   = "true"
