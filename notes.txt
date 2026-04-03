@@ -1,3 +1,37 @@
 ami id for N.Virginia --- ami-02dfbd4ff395f2a1b
 ami id for Oregon     --- ami-03caad32a158f72db
 
+t2.micro ami id ---
+
+
+
+
+
+pipeline {
+    agent any
+
+     stage('init') {
+        steps {
+            dir('Day-1-Terraform-basic-config') {
+              sh  'terraform init'
+            }
+        }
+     }
+    stage('plan') {
+        steps {
+            dir('Day-1-Terraform-basic-config') {
+             sh  'terraform plan'
+            }
+        }
+    }
+stage('apply') {
+    steps {
+        dir('Day-1-Terraform-basic-config') {
+          sh  'terraform apply -auto-approve'
+      
+        }
+    }
+}
+}
+
+

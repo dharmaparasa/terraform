@@ -3,7 +3,16 @@ module "vpc" {
   source = "../../modules/vpc"
   vpc-cidr = "10.0.0.0/16"
   vpc-name = "Karthikvpc"
+  azs = ["us-west-2a","us-west-2b"]
+  private-subnet-cidr = ["10.0.1.0/24", "10.0.2.0/24"]
+  public-subnet-cidr = ["10.0.3.0/24", "10.0.4.0/24"]
 }
+
+variable "vpc_name" {
+  
+}
+
+
 
 //Sg for ec2
 module "ec2-sg" { 
