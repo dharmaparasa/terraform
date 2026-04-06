@@ -4,17 +4,18 @@ module "ec2_instance" {
   name = var.instance-name
   create_security_group = false
   instance_type = var.instance-type
-#   key_name      = "user1"
-#   monitoring    = true
   subnet_id     = var.subnet-id
   vpc_security_group_ids = var.sg_ids
+
+  user_data = var.user_data
+  user_data_replace_on_change = true
 
   tags = {
     Terraform   = "true"
     Environment = "dev"
-
-    Name = "Dharma"
+    Name = var.name
   }
 }
+
 
 

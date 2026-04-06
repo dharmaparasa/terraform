@@ -8,11 +8,11 @@ module "db" {
   allocated_storage = 5
   major_engine_version = "8.0"
   family = "mysql8.0"
-  db_name  = "demodb"
-  username = "user"
+  db_name  = var.db_name
+  username = var.db_username
   port     = "3306"
-
-  iam_database_authentication_enabled = true
+  password_wo = var.db_password
+  # iam_database_authentication_enabled = true
   vpc_security_group_ids = var.db-sgs
   tags = {
     Owner       = "user"
@@ -24,8 +24,5 @@ module "db" {
 
 
   # Database Deletion Protection
-  deletion_protection = true
-}
-variable "db-instance-class" {
-  
+  deletion_protection = false
 }
